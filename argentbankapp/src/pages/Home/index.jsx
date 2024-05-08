@@ -4,7 +4,7 @@ import { Perks } from "../../components/perks/Perks";
 
 export function Home() {
   return (
-    <main>
+    <main className="main">
       <Hero />
       <Perks />
     </main>

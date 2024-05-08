@@ -19,6 +19,12 @@ body {
   flex: 1;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .bg-dark {
   background-color: #12002b;
 }
@@ -77,7 +83,7 @@ body {
 }
 
 .hero {
-  background-image: url('../public/img/bank-tree.jpeg');
+  background-image: url('../public/img/bank-tree.avif');
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;

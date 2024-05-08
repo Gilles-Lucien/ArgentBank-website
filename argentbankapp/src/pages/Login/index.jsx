@@ -3,7 +3,7 @@ import { LoginForm } from "../../components/loginForm/LoginForm";
 
 export function Login() {
   return (
-    <main class="main bg-dark">
+    <main className="main bg-dark">
       <LoginForm />
     </main>
   );
