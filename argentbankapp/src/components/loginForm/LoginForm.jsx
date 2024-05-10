@@ -20,8 +20,8 @@ export function LoginForm() {
     try {
       const resultAction = await dispatch(loginUser({ email, password }));
       const { message } = unwrapResult(resultAction);
-      // Display the success message
-      alert(message);
+      // // Display the success message
+      // alert(message);
     } catch (err) {
       alert("Failed to login");
     }
