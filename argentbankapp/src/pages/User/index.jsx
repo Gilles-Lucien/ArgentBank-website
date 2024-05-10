@@ -1,7 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Account } from "../../components/account/Account";
 
 export function User() {
+  const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+
+  if (!token) {
+    navigate("/sign-in");
+  }
+
   return (
     <main className="main bg-dark">
       <div className="header">

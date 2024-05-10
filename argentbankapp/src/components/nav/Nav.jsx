@@ -1,23 +1,43 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../loginForm/authSlice";
 
 export function Nav() {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  }
+
   return (
     <nav className="main-nav">
-      <a className="main-nav-logo" href="/">
+      <Link className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
           src="./img/argentBankLogo.avif"
           alt="Argent Bank Logo"
         />
         <h1 className="sr-only">Argent Bank</h1>
-      </a>
+      </Link>
       <div>
-        <a className="main-nav-item" href="./sign-in">
-          <i className="fa fa-user-circle"></i>
-          Sign In
-        </a>
+        {token ? (
+          <>
+          
+          <Link className="main-nav-item" to="/user">
+            <i className="fa fa-user-circle" />
+            John Doe
+          </Link>
+          <i className="fa fa-power-off" onClick={handleLogout}/>
+          </>
+        ) : (
+          <Link className="main-nav-item" to="/sign-in">
+            <i className="fa fa-user-circle" />
+            Sign In
+          </Link>
+        )}
       </div>
     </nav>
   );
-};
-
+}
