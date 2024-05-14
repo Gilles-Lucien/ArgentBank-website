@@ -13,6 +13,7 @@ export function User() {
   const navigate = useNavigate();
 
   const handleEditButtonClick = () => setIsEditing(true);
+  const handleCancelButtonClick = () => setIsEditing(false);
 
  useEffect(() => {
     if (!token) {
@@ -28,8 +29,7 @@ export function User() {
           <br />
           {user ? user.userName : ""}
         </h1>
-        {isEditing ? <EditNameForm /> : <button className="edit-button" onClick={handleEditButtonClick}>Edit Name</button>}
-        
+        {isEditing ? <><EditNameForm />  <button className="edit-button" onClick={handleCancelButtonClick}>Cancel</button></> : <button className="edit-button" onClick={handleEditButtonClick}>Edit Name</button>}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account />
