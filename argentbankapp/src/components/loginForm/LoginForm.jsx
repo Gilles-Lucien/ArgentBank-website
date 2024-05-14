@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "./authSlice";
+import { loginUser, fetchUserProfile } from "./authSlice";
 import { useNavigate } from "react-router-dom";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleRememberMeChange = (e) => setRememberMe(e.target.checked);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,19 +18,27 @@ export function LoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const resultAction = await dispatch(loginUser({ email, password }));
-      const { message } = unwrapResult(resultAction);
-      // // Display the success message
-      // alert(message);
-    } catch (err) {
-      alert("Failed to login");
-    }
+    await dispatch(loginUser({ email, password }));
   };
 
-  if (auth.token) {
-    navigate("/user");
-  }
+  useEffect(() => {
+    if (auth.token) {
+      dispatch(fetchUserProfile(auth.token)).then((response) => {
+        if (response.type === "auth/fetchUserProfile/rejected") {
+          alert("Failed to fetch user profile");
+        } else {
+          if (rememberMe) {
+            localStorage.setItem("token", auth.token);
+          }
+          navigate("/user");
+
+        }
+      });
+    }
+    if (auth.error) {
+      alert("Idenfitiant ou mot de passe incorrect");
+    }
+  }, [auth.token, auth.error, dispatch, navigate, rememberMe]);
 
   return (
     <section className="sign-in-content">
@@ -38,14 +47,26 @@ export function LoginForm() {
       <form onSubmit={handleSubmit}>
         <div className="input-wrapper">
           <label htmlFor="email">Email</label>
-          <input type="text" id="email" name="email" value={email} onChange={handleEmailChange} />
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
         </div>
         <div className="input-wrapper">
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" value={password} onChange={handlePasswordChange} />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
         </div>
         <div className="input-remember">
-          <input type="checkbox" id="remember-me" name="remember-me" />
+          <input type="checkbox" id="remember-me" name="remember-me" checked={rememberMe} onChange={handleRememberMeChange} />
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <button className="sign-in-button" type="submit">

@@ -2,14 +2,23 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Account } from "../../components/account/Account";
+import { useEffect, useState } from "react";
+import { EditNameForm } from "../../components/editNameForm/EditNameForm";
+
 
 export function User() {
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
-  if (!token) {
-    navigate("/sign-in");
-  }
+  const handleEditButtonClick = () => setIsEditing(true);
+
+ useEffect(() => {
+    if (!token) {
+      navigate("/sign-in");
+    }
+  }, [token, navigate]);
 
   return (
     <main className="main bg-dark">
@@ -17,9 +26,10 @@ export function User() {
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {user ? user.userName : ""}
         </h1>
-        <button className="edit-button">Edit Name</button>
+        {isEditing ? <EditNameForm /> : null}
+        <button className="edit-button" onClick={handleEditButtonClick}>Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account />

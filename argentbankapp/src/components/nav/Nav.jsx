@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../loginForm/authSlice";
 
 export function Nav() {
-  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -22,12 +22,11 @@ export function Nav() {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
-        {token ? (
+        {user ? (
           <>
-          
           <Link className="main-nav-item" to="/user">
             <i className="fa fa-user-circle" />
-            John Doe
+            {`${user.firstName} ${user.lastName}`}
           </Link>
           <i className="fa fa-power-off" onClick={handleLogout}/>
           </>

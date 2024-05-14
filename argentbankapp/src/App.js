@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { initializeAuth } from "./components/loginForm/authSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./App.css";
 
@@ -10,6 +13,12 @@ import { Login } from "./pages/Login/index.jsx";
 import { User } from "./pages/User/index.jsx";
 
 function App() {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(initializeAuth());
+  }, [dispatch]);
+
   return (
     <>
       <Router>
