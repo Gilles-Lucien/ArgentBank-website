@@ -28,8 +28,8 @@ export function User() {
           <br />
           {user ? user.userName : ""}
         </h1>
-        {isEditing ? <EditNameForm /> : null}
-        <button className="edit-button" onClick={handleEditButtonClick}>Edit Name</button>
+        {isEditing ? <EditNameForm /> : <button className="edit-button" onClick={handleEditButtonClick}>Edit Name</button>}
+        
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account />
