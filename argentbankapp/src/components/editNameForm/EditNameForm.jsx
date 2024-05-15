@@ -1,13 +1,27 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { updateUserName } from "../../components/loginForm/authSlice";
+
 
 export function EditNameForm() {
 const user = useSelector((state) => state.auth.user);
+const token = useSelector((state) => state.auth.token);
+const [userName, setUserName] = useState(user.userName);
+const dispatch = useDispatch();
+
+const handleUserNameChange = (e) => setUserName(e.target.value);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  dispatch(updateUserName({ token, userName }));
+};
+
+
 
   return (
-    <form className="form-edit-name">
+    <form className="form-edit-name" onSubmit={handleSubmit}>
       <div className="input-wrapper">
         <label htmlFor="userName">User name</label>
-        <input type="text" id="userName" name="userName" />
+        <input type="text" id="userName" name="userName" value={userName} onChange={handleUserNameChange} />
       </div>
       <div className="input-wrapper">
         <label htmlFor="firstName">First Name</label>
