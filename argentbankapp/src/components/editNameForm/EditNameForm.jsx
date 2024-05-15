@@ -3,7 +3,7 @@ import { useState } from "react";
 import { updateUserName } from "../../components/loginForm/authSlice";
 
 
-export function EditNameForm() {
+export function EditNameForm({ onSuccess }) {
 const user = useSelector((state) => state.auth.user);
 const token = useSelector((state) => state.auth.token);
 const [userName, setUserName] = useState(user.userName);
@@ -15,6 +15,7 @@ const handleSubmit = async (e) => {
   try {
     await dispatch(updateUserName({ token, userName }));
     alert('Successfully updated user name');
+    onSuccess();
   } catch (error) {
     console.error('Failed to update user name', error);
   }

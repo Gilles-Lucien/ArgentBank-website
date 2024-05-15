@@ -29,7 +29,7 @@ export function User() {
           <br />
           {user ? user.userName : ""}
         </h1>
-        {isEditing ? <><EditNameForm />  <button className="edit-button" onClick={handleCancelButtonClick}>Cancel</button></> : <button className="edit-button" onClick={handleEditButtonClick}>Edit Name</button>}
+        {isEditing ? <><EditNameForm onSuccess={() => setIsEditing(false)} />  <button className="edit-button" onClick={handleCancelButtonClick}>Cancel</button></> : <button className="edit-button" onClick={handleEditButtonClick}>Edit Name</button>}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account />
