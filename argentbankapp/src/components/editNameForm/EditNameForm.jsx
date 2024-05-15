@@ -10,11 +10,15 @@ const [userName, setUserName] = useState(user.userName);
 const dispatch = useDispatch();
 
 const handleUserNameChange = (e) => setUserName(e.target.value);
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
-  dispatch(updateUserName({ token, userName }));
+  try {
+    await dispatch(updateUserName({ token, userName }));
+    alert('Successfully updated user name');
+  } catch (error) {
+    console.error('Failed to update user name', error);
+  }
 };
-
 
 
   return (
