@@ -45,6 +45,20 @@ Your server should now be running at http://locahost:3001 and you will now have 
 
 Once you run the `populate-db` script, you should have two users in your database:
 
+## Launch mongoDB
+
+Start the mongod service using systemctl:
+
+```bash
+sudo systemctl start mongod
+```
+
+Verify that the MongoDB service has started correctly by checking its status:
+
+```bash
+sudo systemctl status mongod
+```
+
 ### Tony Stark
 
 - First Name: `Tony`
