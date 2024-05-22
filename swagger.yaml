@@ -65,8 +65,8 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
+      produces:
+       - application/json
       responses:
         '200':
           description: User profile retrieved successully
@@ -101,6 +101,52 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /user/accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts Module
+      summary: User accounts API
+      description: API for fetching a user accounts
+      produces:
+       - application/json
+      responses:
+        '200':
+          description: User accounts retrieved successully
+          schema:
+            $ref: '#/definitions/Accounts'
+        '400':
+          description: No accounts found
+        '500':
+          description: Internal Server Error
+  /user/accounts/{accountID}/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts Module
+      summary: User accounts API
+      description: API for fetching a user account's transations
+      parameters:
+      - in: path
+        name: accountID
+        required: true
+        type: string
+        description: The ID of the account
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User account's transations retrieved successully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: No accounts found
+        '500':
+          description: Internal Server Error
+
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -156,3 +202,42 @@ definitions:
     properties:
       userName:
         type: string
+  Accounts:
+    type: object
+    properties:
+      status:
+        type: integer
+      message: 
+        type: string
+      body:
+        type: object
+        properties:
+          accountID:
+            type: integer
+          availableBalance: 
+            type: number
+          accountTitle:
+            type: string
+  Transaction:
+    type: object
+    properties:
+      status:
+        type: integer
+      message: 
+        type: string
+      body:
+        type: object
+        properties:
+          ID:
+            type: integer
+          amount: 
+            type: number
+          transactionType:
+            type: string
+          transactionDate:
+            type: string
+          transactionDescription:
+            type: string
+          
+
+
