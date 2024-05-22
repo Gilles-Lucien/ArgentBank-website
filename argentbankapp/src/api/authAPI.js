@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const host = 'http://localhost:3001';
+
 export async function loginUser(loginData) {
-    const response = await axios.post('http://localhost:3001/api/v1/user/login', {
+    const response = await axios.post(`${host}/api/v1/user/login`, {
         email: loginData.email,
         password: loginData.password,
     });
@@ -9,7 +11,7 @@ export async function loginUser(loginData) {
 }
 
 export async function fetchUserProfile(token) {
-    const response = await axios.post('http://localhost:3001/api/v1/user/profile', {}, {
+    const response = await axios.post(`${host}/api/v1/user/profile`, {}, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -18,7 +20,7 @@ export async function fetchUserProfile(token) {
 }
 
 export async function updateUserName(token, userName) {
-    const response = await axios.put('http://localhost:3001/api/v1/user/profile', { userName }, {
+    const response = await axios.put(`${host}/api/v1/user/profile`, { userName }, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
