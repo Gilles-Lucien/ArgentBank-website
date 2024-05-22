@@ -92,7 +92,7 @@ Ressources:
 - Account
 - Transaction
 
-GET /user/accounts
+check GET /user/accounts
 GET /user/accounts/{accountID}/transactions
 GET /user/accounts/{accountID}/transactions/{transactionID}
 PUT /user/accounts/{accountID}/transactions/{transactionID}
