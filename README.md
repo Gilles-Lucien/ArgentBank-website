@@ -94,5 +94,5 @@ Ressources:
 
 check GET /user/accounts
 GET /user/accounts/{accountID}/transactions
-GET /user/accounts/{accountID}/transactions/{transactionID}
-PUT /user/accounts/{accountID}/transactions/{transactionID}
+<!-- GET /user/accounts/{accountID}/transactions/{transactionID} No need to GET individual transactions, they are all already called in the previous endpoint-->
+PUT ou PATCH /user/accounts/{accountID}/transactions/{transactionID}
