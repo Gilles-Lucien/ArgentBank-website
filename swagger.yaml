@@ -115,7 +115,9 @@ paths:
         '200':
           description: User accounts retrieved successully
           schema:
-            $ref: '#/definitions/Accounts'
+            type: array
+            items:
+              $ref: '#/definitions/Account'
         '400':
           description: No accounts found
         '500':
@@ -140,12 +142,14 @@ paths:
         '200':
           description: User account's transations retrieved successully
           schema:
-            $ref: '#/definitions/Transaction'
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
         '400':
           description: No accounts found
         '500':
           description: Internal Server Error
-  /user/accounts/{accountID}/transactions/{transactionID}:
+  /user/transactions/{transactionID}:
     patch:
       security:
         - Bearer: []
@@ -155,22 +159,23 @@ paths:
       description: API for editing a user account's transation
       parameters:
       - in: path
-        name: accountID
-        required: true
-        type: string
-        description: The ID of the account
-      - in: path
         name: transactionID
         required: true
         type: string
         description: The ID of the transaction
+      - in: body
+        name: body
+        description: Transaction Edit Payload
+        required: true
+        schema:
+           $ref: '#/definitions/TransactionEditing'  
       produces:
         - application/json
       responses:
         '200':
           description: User account's transations updated successully
           schema:
-            $ref: '#/definitions/TransactionEditing'
+            $ref: '#/definitions/TransactionEditingResponse'
         '400':
           description: Incorrect parameters or payload
         '500':
@@ -232,7 +237,7 @@ definitions:
     properties:
       userName:
         type: string
-  Accounts:
+  Account:
     type: object
     properties:
       status:
@@ -272,7 +277,7 @@ definitions:
             type: string
           Note:
             type: string
-  TransactionEditing:
+  TransactionEditingResponse:
     type: object
     properties:
       status:
@@ -286,5 +291,9 @@ definitions:
             type: integer
           key:
             type: string
-
+  TransactionEditing:
+    type: object
+    properties:
+      attribute:
+        type: string
 
