@@ -145,6 +145,36 @@ paths:
           description: No accounts found
         '500':
           description: Internal Server Error
+  /user/accounts/{accountID}/transactions/{transactionID}:
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts Module
+      summary: User accounts API
+      description: API for editing a user account's transation
+      parameters:
+      - in: path
+        name: accountID
+        required: true
+        type: string
+        description: The ID of the account
+      - in: path
+        name: transactionID
+        required: true
+        type: string
+        description: The ID of the transaction
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User account's transations updated successully
+          schema:
+            $ref: '#/definitions/TransactionEditing'
+        '400':
+          description: Incorrect parameters or payload
+        '500':
+          description: Internal Server Error
 
 
 securityDefinitions:
@@ -228,16 +258,33 @@ definitions:
       body:
         type: object
         properties:
-          ID:
+          id:
             type: integer
           amount: 
             type: number
-          transactionType:
+          Type:
             type: string
-          transactionDate:
+          Date:
             type: string
-          transactionDescription:
+          Description:
             type: string
-          
+          Category:
+            type: string
+          Note:
+            type: string
+  TransactionEditing:
+    type: object
+    properties:
+      status:
+        type: integer
+      message: 
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: integer
+          key:
+            type: string
 
 
