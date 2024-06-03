@@ -25,7 +25,7 @@ export function LoginForm() {
     if (auth.token) {
       dispatch(fetchUserProfile(auth.token)).then((response) => {
         if (response.type === "auth/fetchUserProfile/rejected") {
-          alert("Failed to fetch user profile");
+          console("Failed to fetch user profile");
         } else {
           if (rememberMe) {
             localStorage.setItem("token", auth.token);
