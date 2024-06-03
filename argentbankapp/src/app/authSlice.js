@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginUser as loginUserAPI } from '../../api/authAPI';
-import { fetchUserProfile as fetchUserProfileAPI } from '../../api/authAPI';
-import { updateUserName as updateUserNameAPI } from '../../api/authAPI';
+import { loginUser as loginUserAPI } from '../api/authAPI';
+import { fetchUserProfile as fetchUserProfileAPI } from '../api/authAPI';
+import { updateUserName as updateUserNameAPI } from '../api/authAPI';
 
 export const loginUser = createAsyncThunk('auth/loginUser', loginUserAPI);
 export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', fetchUserProfileAPI);

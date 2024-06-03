@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { updateUserName } from "../../components/loginForm/authSlice";
+import { updateUserName } from "../../app/authSlice";
 
 
 export function EditNameForm({ onSuccess }) {

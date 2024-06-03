@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { initializeAuth } from "./components/loginForm/authSlice";
+import { initializeAuth } from "./app/authSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 

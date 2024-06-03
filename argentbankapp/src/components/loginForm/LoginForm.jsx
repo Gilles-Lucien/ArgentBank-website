@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, fetchUserProfile } from "./authSlice";
+import { loginUser, fetchUserProfile } from "../../app/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {

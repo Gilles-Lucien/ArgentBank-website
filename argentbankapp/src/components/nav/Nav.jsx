@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../loginForm/authSlice";
+import { logoutUser } from "../../app/authSlice";
 
 export function Nav() {
   const user = useSelector((state) => state.auth.user);
