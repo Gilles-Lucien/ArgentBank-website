@@ -4,13 +4,27 @@ import { loginUser, fetchUserProfile } from "./authSlice";
 import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-  const handleRememberMeChange = (e) => setRememberMe(e.target.checked);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+
+
+  const handleInputChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCheckboxChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.checked,
+    });
+  }
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +32,7 @@ export function LoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(loginUser({ email, password }));
+    await dispatch(loginUser(form));
   };
 
   useEffect(() => {
@@ -27,7 +41,7 @@ export function LoginForm() {
         if (response.type === "auth/fetchUserProfile/rejected") {
           console("Failed to fetch user profile");
         } else {
-          if (rememberMe) {
+          if (form.rememberMe) {
             localStorage.setItem("token", auth.token);
           }
           navigate("/user");
@@ -38,7 +52,7 @@ export function LoginForm() {
     if (auth.error) {
       alert("Idenfitiant ou mot de passe incorrect");
     }
-  }, [auth.token, auth.error, dispatch, navigate, rememberMe]);
+  }, [auth.token, auth.error, dispatch, navigate, form.rememberMe]);
 
   return (
     <section className="sign-in-content">
@@ -51,8 +65,8 @@ export function LoginForm() {
             type="text"
             id="email"
             name="email"
-            value={email}
-            onChange={handleEmailChange}
+            value={form.email}
+            onChange={handleInputChange}
           />
         </div>
         <div className="input-wrapper">
@@ -61,12 +75,12 @@ export function LoginForm() {
             type="password"
             id="password"
             name="password"
-            value={password}
-            onChange={handlePasswordChange}
+            value={form.password}
+            onChange={handleInputChange}
           />
         </div>
         <div className="input-remember">
-          <input type="checkbox" id="remember-me" name="remember-me" checked={rememberMe} onChange={handleRememberMeChange} />
+          <input type="checkbox" id="remember-me" name="rememberMe" checked={form.rememberMe} onChange={handleCheckboxChange} />
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <button className="sign-in-button" type="submit">
