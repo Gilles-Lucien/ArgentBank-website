@@ -84,3 +84,15 @@ Static HTML and CSS has been created for most of the site and is located in: `/d
 For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
 
 And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+
+
+## Endpoints for phase 2 
+
+Ressources:
+- Account
+- Transaction
+
+check GET /user/accounts
+GET /user/accounts/{accountID}/transactions
+<!-- GET /user/accounts/{accountID}/transactions/{transactionID} No need to GET individual transactions, they are all already called in the previous endpoint-->
+PUT ou PATCH /user/accounts/{accountID}/transactions/{transactionID}
