@@ -52,6 +52,7 @@ export const initializeAuth = createAsyncThunk('auth/initializeAuth', async (_, 
       builder.addCase(fetchUserProfile.fulfilled, (state, action) => {
         state.user = action.payload.body;
       });
+      // When updateUserName is fulfilled, the user name in the state is updated with the new user name.
       builder.addCase(updateUserName.fulfilled, (state, action) => {
         if (state.user) {
           state.user.userName = action.payload.body.userName;

@@ -13,6 +13,7 @@ const handleUserNameChange = (e) => setUserName(e.target.value);
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
+    // Dispatch the updateUserName action creator with the token and the new user name
     await dispatch(updateUserName({ token, userName }));
     alert('Successfully updated user name');
     onSuccess();
@@ -26,6 +27,7 @@ const handleSubmit = async (e) => {
     <form className="form-edit-name" onSubmit={handleSubmit}>
       <div className="input-wrapper">
         <label htmlFor="userName">User name</label>
+        {/* Add an input field for the user name that allows the user to change their user name */}
         <input type="text" id="userName" name="userName" value={userName} onChange={handleUserNameChange} />
       </div>
       <div className="input-wrapper">
