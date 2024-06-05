@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+// Import the useDispatch and useSelector hooks from the react-redux library
 import { useDispatch, useSelector } from "react-redux";
+// Import the loginUser action creator
 import { loginUser, fetchUserProfile } from "../../app/authSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -27,11 +29,14 @@ export function LoginForm() {
   }
 
   const navigate = useNavigate();
+  // Get the dispatch function from the useDispatch hook. This function will be used to dispatch the loginUser action creator to the Redux store.
   const dispatch = useDispatch();
+  // Get the auth state from the Redux store using the useSelector hook
   const auth = useSelector((state) => state.auth);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // When the form is submited, dispatch the loginUser action creator with the form data
     await dispatch(loginUser(form));
   };
 
@@ -45,7 +50,6 @@ export function LoginForm() {
             localStorage.setItem("token", auth.token);
           }
           navigate("/user");
-
         }
       });
     }
