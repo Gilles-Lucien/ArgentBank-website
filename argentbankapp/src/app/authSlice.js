@@ -3,6 +3,8 @@ import { loginUser as loginUserAPI } from '../api/authAPI';
 import { fetchUserProfile as fetchUserProfileAPI } from '../api/authAPI';
 import { updateUserName as updateUserNameAPI } from '../api/authAPI';
 
+// Create the loginUser, fetchUserProfile, and updateUserName async thunks. A thunk is a function that can contain asynchronous logic.
+// These thunks will be used to send requests to the API to log in the user, fetch the user profile, and update the user name, respectively.
 export const loginUser = createAsyncThunk('auth/loginUser', loginUserAPI);
 export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', fetchUserProfileAPI);
 export const updateUserName = createAsyncThunk('auth/updateUserName', async ({ token, userName }, thunkAPI) => {
@@ -21,10 +23,12 @@ export const initializeAuth = createAsyncThunk('auth/initializeAuth', async (_, 
     }
   });
 
-
+//The createSlice function is used to generate a slice of the Redux store.
+//This slice is named 'auth' and has an initial state with token and user set to null.
   const authSlice = createSlice({
     name: 'auth',
     initialState: { token: null, user: null},
+    //The reducers field defines a logoutUser reducer that resets the state and removes the token from local storage.
     reducers: {
       logoutUser: (state) => {
         state.token = null;
@@ -32,6 +36,8 @@ export const initializeAuth = createAsyncThunk('auth/initializeAuth', async (_, 
         localStorage.removeItem('token');
       },
     },
+    //The extraReducers field defines how the state should be updated based on the actions dispatched by the thunks.
+    //For example, when loginUser is fulfilled, the state's token is set to the payload of the action, and the error is set to null.
     extraReducers: (builder) => {
       builder.addCase(initializeAuth.fulfilled, (state, action) => {
         state.token = action.payload;
