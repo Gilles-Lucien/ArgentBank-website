@@ -26,7 +26,7 @@ export function Nav() {
           <>
           <Link className="main-nav-item" to="/user">
             <i className="fa fa-user-circle" />
-            {`${user.firstName} ${user.lastName}`}
+            {`${user.userName}`}
           </Link>
           <i className="fa fa-power-off" onClick={handleLogout}/>
           </>
